@@ -1,78 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>BOT HEART - Mi catálogo  :: Oscar Polania</title>
+
+    <!-- Incluir el CSS externo -->
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
 
-<!-- Cabecera con icono, título y carrito -->
-<header class="header">
-    <div class="logo-section">
-        <img src="tu-imagen-icono.png" alt="Icono" class="icon">
-        <div class="title-section">
-            <h1>BOT HEART</h1>
-            <p>Automatización</p>
-        </div>
-    </div>
-    <div class="cart-section">
-        <span id="cart-count">0</span>
-        <img src="icono-carrito.png" alt="Carrito" class="cart-icon" onclick="toggleCart()">
-    </div>
-</header>
+    <!-- Estilos adicionales si es necesario -->
+  </head>
 
-<!-- Vista en carrusel de productos -->
-<section class="carousel-section">
-    <h2>Platos principales</h2>
-    <p class="carousel-subtitle">Descripción de los platos</p>
-    <div class="carousel">
-        <div class="carousel-item">
-            <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="Producto 1">
-            <div class="product-info">
-                <p><strong>Producto 1</strong></p>
-                <p>Descripción del producto</p>
-                <p><strong>$20.000</strong></p>
-                <button class="add-btn" onclick="addToCart(this)">+</button>
+  <body data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg_w_custom position-relative">
+    
+    <div id="wtfm">
+      <!-- Cabecera -->
+      <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+        <div class="container">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center flex-equal-2 me-2">
+              <a href="https://wa.me/573183851642">
+                <img alt="Oscar Polania" src="https://botheart.whataform.com/assets/form/global/img/logo_empty.png" class="logo-default h-50px image-square">
+                <img alt="Oscar Polania" src="https://botheart.whataform.com/assets/profile/types/logos/kiosoko.jpg" class="logo-sticky h-50px image-square">
+              </a>
             </div>
+            <div class="flex-equal-2 text-end ms-1">
+              <a id="cart_wtfm" href="#" class="btn_w_custom_primary position-relative mt-1 cart_wtfm">
+                <i class="las la-shopping-cart color-txt fs-1"></i>  
+                <span class="item_cart_number position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger" v-if="itemsCart.length > 0">{{items}}</span>
+              </a>
+            </div>
+          </div>
         </div>
-        <!-- Más items de productos en carrusel -->
-    </div>
-</section>
+      </div>
 
-<!-- Sesión carrito -->
-<div id="cart" class="cart-overlay">
-    <div class="cart-content">
-        <h3>Unidades en carrito (<span id="cart-items-count">0</span>)</h3>
-        <span class="close-cart" onclick="toggleCart()">x</span>
-        <div id="cart-items"></div>
-        <div class="cart-total">
-            <p>Total de tu orden: <strong>COP $<span id="cart-total">0</span></strong></p>
-            <button onclick="finalizeOrder()">Finalizar orden</button>
+      <!-- Sección de Productos -->
+      <div class="container">
+        <div class="row">
+          <!-- Producto 1 -->
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto 1">
+              <div class="card-body">
+                <h5 class="card-title">Producto 1</h5>
+                <p class="card-text">Descripción breve del producto 1.</p>
+                <p class="card-text"><strong>Precio:</strong> COP$ 100.000</p>
+                <a href="#" class="btn btn-primary">Agregar al carrito</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Agrega más productos aquí -->
         </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="mb-0">
+        <div class="color-from pt-20">
+          <div class="container mt-10">
+            <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
+              <div class="d-flex align-items-center order-2 order-md-1">
+                <!-- Elimina los hipervínculos de Whataform © 2024 -->
+              </div>
+              <ul class="menu order-1 mb-5">
+                <!-- Elimina botones no necesarios -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
 
-<!-- Formulario para completar la orden -->
-<section class="form-section">
-    <h3>Total de tu orden: COP $<span id="final-total">0</span></h3>
-    <button class="whatsapp-btn">Enviar a WhatsApp</button>
-    <p>Se requerirá de WhatsApp móvil o web para enviar el mensaje.</p>
-    <form>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="table">Mesa:</label>
-        <select id="table" name="table" required>
-            <option value="">Selecciona tu mesa</option>
-            <option value="1">Mesa 1</option>
-            <!-- Opción hasta mesa 12 -->
-        </select>
-        <label for="message">Mensaje:</label>
-        <textarea id="message" name="message" placeholder="Escribe tus apreciaciones (opcional)"></textarea>
-    </form>
-</section>
-
-<script src="script.js"></script>
-</body>
+    <!-- Incluir el archivo JavaScript -->
+    <script src="script.js"></script>
+  </body>
 </html>
