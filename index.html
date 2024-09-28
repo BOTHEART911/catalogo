@@ -16,7 +16,6 @@
     <link href="https://botheart.whataform.com/assets/dashboard_v2/js/fancyboxvue/fancybox.css" rel="stylesheet" type="text/css" />
 
     <style>
-      /* Estilos adicionales personalizados */
       .item_cart_number {
         background-color: #dc3545;
         color: white;
@@ -30,12 +29,11 @@
 
     <div id="wtfm">
       
-      <!-- Cabecera modificada -->
-      <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+      <!-- Cabecera -->
+      <div class="landing-header">
         <div class="container">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center flex-equal-2 me-2">
-              <!-- Enlace modificado a WhatsApp -->
               <a href="https://wa.me/573183851642">
                 <img alt="Oscar Polania" src="https://botheart.whataform.com/assets/form/global/img/logo_empty.png" class="logo-default h-50px image-square">
                 <img alt="Oscar Polania" src="https://botheart.whataform.com/assets/profile/types/logos/kiosoko.jpg" class="logo-sticky h-50px image-square">
@@ -44,34 +42,14 @@
             <div class="flex-equal-2 text-end ms-1">
               <a id="cart_wtfm" href="#" class="btn_w_custom_primary position-relative mt-1 cart_wtfm">
                 <i class="las la-shopping-cart color-txt fs-1"></i>  
-                <span class="item_cart_number position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger" v-if="itemsCart.length > 0">{{items}}</span>
+                <span id="cart-count" class="item_cart_number position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger">0</span>
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Vista del carrito de compras modificada -->
-      <div class="container">
-        <div class="card-body">
-          <div class="row py-lg-5">
-            <div class="col-sm-3 col-md-3 col-lg-2 col-3 mb-4 px-lg-10">
-              <img data-src="https://botheart.whataform.com/assets/profile/types/logos/kiosoko.jpg" alt="image" class="w-100 image-square">
-            </div>
-            <div class="col-sm-9 col-md-9 col-lg-10 col-9">
-              <div class="d-flex justify-content-between align-items-center align-items-start flex-wrap mb-2">
-                <div class="d-flex flex-column">
-                  <!-- Modificado a "Creado por Oscar Polania" -->
-                  <h2 class="text_color_w_custom fs-4 opacity-75 me-1">Creado por Oscar Polania</h2>
-                  <h1 class="text_color_w_custom fs-2 me-1 mw-600px">Mi catálogo</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lista de productos -->
+      <!-- Productos -->
       <div class="container">
         <div class="row">
           <!-- Producto 1 -->
@@ -82,11 +60,11 @@
                 <h5 class="card-title">Producto 1</h5>
                 <p class="card-text">Descripción breve del producto 1.</p>
                 <p class="card-text"><strong>Precio:</strong> COP$ 100.000</p>
-                <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                <button class="btn btn-primary add-to-cart" data-product="Producto 1">Agregar al carrito</button>
               </div>
             </div>
           </div>
-          
+
           <!-- Producto 2 -->
           <div class="col-md-4 mb-4">
             <div class="card h-100">
@@ -95,11 +73,11 @@
                 <h5 class="card-title">Producto 2</h5>
                 <p class="card-text">Descripción breve del producto 2.</p>
                 <p class="card-text"><strong>Precio:</strong> COP$ 200.000</p>
-                <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                <button class="btn btn-primary add-to-cart" data-product="Producto 2">Agregar al carrito</button>
               </div>
             </div>
           </div>
-          
+
           <!-- Producto 3 -->
           <div class="col-md-4 mb-4">
             <div class="card h-100">
@@ -108,34 +86,39 @@
                 <h5 class="card-title">Producto 3</h5>
                 <p class="card-text">Descripción breve del producto 3.</p>
                 <p class="card-text"><strong>Precio:</strong> COP$ 300.000</p>
-                <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                <button class="btn btn-primary add-to-cart" data-product="Producto 3">Agregar al carrito</button>
               </div>
             </div>
           </div>
 
-          <!-- Puedes agregar más productos aquí -->
         </div>
       </div>
 
-      <!-- Footer modificado -->
+      <!-- Footer -->
       <div class="mb-0">
         <div class="color-from pt-20">
           <div class="container mt-10">
             <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
-              <div class="d-flex align-items-center order-2 order-md-1">
-                <!-- Eliminado el enlace de "Tecnología de Whataform © 2024" -->
-              </div>
-              <ul class="menu order-1 mb-5">
-                <!-- Eliminados los botones "Reportar Abuso" y "Crea tu Propio Catálogo" -->
-              </ul>
+              <div class="d-flex align-items-center order-2 order-md-1"></div>
+              <ul class="menu order-1 mb-5"></ul>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Enlaces a los scripts necesarios -->
-    <script src="https://botheart.whataform.com/assets/form/global/lang/es.js"></script>
-    <script src="/js/wtfm_model_lite.js?id=faed29b56ca33294cab8"></script>
+    <!-- Scripts -->
+    <script>
+      let cartCount = 0;
+
+      // Función para agregar productos al carrito
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+          cartCount++;
+          document.getElementById('cart-count').innerText = cartCount;
+          alert(`${this.dataset.product} ha sido añadido al carrito.`);
+        });
+      });
+    </script>
   </body>
 </html>
