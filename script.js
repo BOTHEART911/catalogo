@@ -1,34 +1,30 @@
-let cart = [];
-let cartCount = 0;
-let cartTotal = 0;
+// Simulación del manejo del carrito y productos
 
-function addToCart(btn) {
-    // Increment cart count
-    cartCount++;
-    document.getElementById('cart-count').textContent = cartCount;
+// Variables globales
+let itemsCart = [];
+let itemCount = 0;
 
-    // Flash green message
-    alert("Genial! se ha añadido el producto al carrito");
-
-    // Update cart
-    let productInfo = btn.closest('.carousel-item').querySelector('.product-info').cloneNode(true);
-    document.getElementById('cart-items').appendChild(productInfo);
-    updateCartTotal();
+// Función para agregar productos al carrito
+function addToCart(product) {
+  itemsCart.push(product);
+  itemCount++;
+  updateCartUI();
 }
 
-function toggleCart() {
-    const cartOverlay = document.getElementById('cart');
-    cartOverlay.style.display = cartOverlay.style.display === 'none' || cartOverlay.style.display === '' ? 'flex' : 'none';
+// Función para actualizar la interfaz del carrito
+function updateCartUI() {
+  const cartNumber = document.querySelector('.item_cart_number');
+  if (cartNumber) {
+    cartNumber.innerText = itemCount;
+    cartNumber.style.display = itemCount > 0 ? 'inline-block' : 'none';
+  }
 }
 
-function updateCartTotal() {
-    // Sum up all items in the cart
-    cartTotal = cartCount * 20000; // Example product price
-    document.getElementById('cart-total').textContent = cartTotal;
-    document.getElementById('final-total').textContent = cartTotal;
-}
-
-function finalizeOrder() {
-    toggleCart();
-    alert("La orden será enviada a WhatsApp");
-}
+// Simulación de añadir producto (puedes conectar esto con tus datos reales)
+document.querySelectorAll('.btn.btn-primary').forEach(button => {
+  button.addEventListener('click', function () {
+    const product = this.parentElement.querySelector('.card-title').innerText;
+    addToCart(product);
+    alert(product + ' añadido al carrito.');
+  });
+});
